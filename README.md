@@ -73,13 +73,18 @@ Para levantar la interfaz de usuario, sigue estos pasos:
     ```bash
     npm install
     ```
+3.  **Configurar variables de entorno:**
+    Crea un archivo `.env` en la raíz siguiendo el ejemplo de las credenciales de tu base de datos:
+    ```env
+    VITE_API_URL=http://localhost:4002/api
+    ```
 
-3.  **Iniciar en modo desarrollo:**
+5.  **Iniciar en modo desarrollo:**
     ```bash
     npm run dev
     ```
 
-4.  **Acceder a la aplicación:**
+6.  **Acceder a la aplicación:**
     La aplicación estará disponible en `http://localhost:3000` (puerto por defecto de Vite).
 
 ## 📸 Evidencias
