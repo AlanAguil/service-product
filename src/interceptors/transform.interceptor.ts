@@ -15,8 +15,17 @@ export class TransformInterceptor<T>
     context: ExecutionContext,
     next: CallHandler<T>,
   ): Observable<ApiResponse<T>> | Promise<Observable<ApiResponse<T>>> {
-    const status = 200;
-    const message = 'success';
-    return next.handle().pipe(map((data) => ({ data, status, message })));
+    return next.handle().pipe(
+      map((data) => {
+        if (data instanceof Error) {
+          throw data;
+        }
+        return {
+          data,
+          status: 200,
+          message: 'Operación exitosa'
+        };
+      })
+    );
   }
 }

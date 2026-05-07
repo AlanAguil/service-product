@@ -1,0 +1,41 @@
+📓 Examen diagnóstico - Desarrollo Web Integral
+Hector Ulises Stamatio Ferraez ツ
+•
+1 may (Última modificación: 16:03)
+100 puntos
+Fecha de entrega: 23:59
+Desarrolla una aplicación web tipo CRUD usando las tecnologías que prefieras. Puedes usar HTML, CSS, JavaScript, React, Angular, Vue, Node.js, Spring Boot, Django, Laravel, Firebase, MySQL, PostgreSQL, MongoDB, LocalStorage o cualquier otra tecnología que conozcas.
+
+Tu aplicación debe gestionar una entidad de tu elección, por ejemplo: productos, tareas, estudiantes, clientes, libros, cursos, empleados o cualquier otra entidad similar.
+
+La aplicación debe permitir:
+Registrar nuevos elementos.
+Consultar una lista de elementos.
+Editar elementos existentes.
+Eliminar elementos.
+Cada registro debe tener al menos 4 campos.
+
+El proyecto debe subirse a GitHub y contener un archivo README.md con:
+Nombre del proyecto.
+Descripción.
+Tecnologías utilizadas.
+Funcionalidades.
+Instrucciones para ejecutar el proyecto.
+Evidencias o capturas de pantalla.
+Indicación de si se usó IA y para qué.
+Se permite el uso de inteligencia artificial, documentación y recursos externos. Sin embargo, cada estudiante deberá poder explicar el funcionamiento general de su proyecto.
+
+Entrega
+Subir la liga del repositorio de GitHub y capturas del sistema funcionando.
+
+Revisión
+
+Criterio                                  Puntos
+Repositorio en GitHub.         10
+README completo.               10
+Interfaz funcional.                 15
+Crear registros                      15
+Consultar registros.              15
+Editar registros.                     15
+Eliminar registros.                 10
+Organización del código.     10

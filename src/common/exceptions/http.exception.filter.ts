@@ -3,37 +3,36 @@ import {
   Catch,
   ArgumentsHost,
   HttpException,
-  BadRequestException,
+  HttpStatus,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
-import { capitalizeAndJoinWords } from 'src/utils/general.functions';
+import { Response } from 'express';
+import { ApiResponse } from '../../interceptors/dto/response.dto';
 
-@Catch(HttpException)
+@Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
-  catch(exception: HttpException, host: ArgumentsHost) {
+  catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
-    const request = ctx.getRequest<Request>();
-    const status = exception.getStatus();
 
-    const responseBody = {
-      message: exception.message,
-      statusCode: status,
-      timestamp: new Date().toISOString(),
-      path: request.url,
-    };
+    let status = HttpStatus.INTERNAL_SERVER_ERROR;
+    let message = 'Error interno del servidor';
 
-    if (exception instanceof BadRequestException) {
-      let badRequestResponseData = exception.getResponse() as Record<
-        string,
-        any
-      >;
-      if (Array.isArray(badRequestResponseData.message)) {
-        responseBody.message = badRequestResponseData.message[0];
-      } else {
-        responseBody.message = badRequestResponseData.message
+    if (exception instanceof HttpException) {
+      status = exception.getStatus();
+      const exceptionResponse = exception.getResponse();
+      
+      if (typeof exceptionResponse === 'string') {
+        message = exceptionResponse;
+      } else if (typeof exceptionResponse === 'object') {
+        message = (exceptionResponse as any).message || message;
       }
     }
+
+    const responseBody: ApiResponse<null> = {
+      status,
+      message,
+      data: null
+    };
 
     response.status(status).json(responseBody);
   }

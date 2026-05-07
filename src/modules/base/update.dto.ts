@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsOptional, IsNumber, IsPositive, IsDate } from 'class-validator';
 import { Type } from 'class-transformer';
+import { stringConstants } from 'src/utils/string.constant';
 
 export class UpdateDto {
   @ApiProperty({
@@ -11,16 +12,6 @@ export class UpdateDto {
   @IsNumber()
   @IsPositive()
   id: bigint;
-
-  @ApiProperty({
-    description: 'Usuario que actualiza el registro',
-    example: '1',
-    type: String,
-    required: false
-  })
-  @IsString()
-  @IsOptional()
-  updatedBy?: string;
 
   @ApiProperty({
     description: 'Fecha de última actualización',

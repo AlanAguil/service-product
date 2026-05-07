@@ -37,3 +37,17 @@ export const addDaysToDateString = (dateString: string, days: number): string =>
   return `${year}-${month}-${day}`;
 };
 
+export const parseMonthYearToDateRange = (monthYear: string): { startDate: Date; endDate: Date } => {
+  const [year, month] = monthYear.split('-').map(Number);
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0, 23, 59, 59);
+  return { startDate, endDate };
+};
+
+export const formatDateRange = (startDate: Date, endDate: Date, locale: string = 'es-MX'): string => {
+  return `${startDate.toLocaleDateString(locale)} - ${endDate.toLocaleDateString(locale)}`;
+};
+
+export const slugify = (text: string): string => {
+  return text.toLowerCase().replace(/\s+/g, '-');
+};

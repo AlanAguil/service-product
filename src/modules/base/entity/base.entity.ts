@@ -1,32 +1,15 @@
-import { Column, DeleteDateColumn } from "typeorm";
+import { Column, DeleteDateColumn, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from '@nestjs/swagger';
 
 export abstract class Base {
-  @ApiProperty({
-    description: 'usuario que creó el registro',
-    example: '1',
-    type: String,
-    required: false
-  })
-  @Column("varchar", {
-    name: "created_by",
-    nullable: true,
-    comment: "usuario que creó el registro",
-  })
-  createdBy: string | null;
 
   @ApiProperty({
-    description: 'usuario que actualizó el registro',
-    example: '1',
-    type: String,
-    required: false
+    description: 'ID único del registro',
+    example: 1,
+    type: Number
   })
-  @Column("varchar", {
-    name: "updated_by",
-    nullable: true,
-    comment: "usuario que actualizó el registro",
-  })
-  updatedBy: string | null;
+  @PrimaryGeneratedColumn({ type: 'bigint', name: 'id' })
+  id: bigint;
 
   @ApiProperty({
     description: 'Fecha de creación',

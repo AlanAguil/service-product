@@ -1,38 +1,39 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AppModule } from './app.module';
 import { TransformInterceptor } from './interceptors/transform.interceptor';
+import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'debug', 'log', 'verbose'],
+  });
 
-  app.setGlobalPrefix('l');
+  app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalInterceptors(new TransformInterceptor());
-  app.enableCors();
+  app.useGlobalFilters(new HttpExceptionFilter());
+  
+  if (process.env.NODE_ENV === 'development') {
+    app.enableCors({
+      origin: ['http://localhost:3000'],
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true,
+      allowedHeaders: 'Content-Type, Accept, Authorization',
+    });
+  }
 
   const config = new DocumentBuilder()
-    .setTitle('Libamaq API')
-    .setDescription('API para el sistema de ventas Libamaq')
+    .setTitle('Product')
+    .setDescription('API para Product')
     .setVersion('1.0')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        name: 'JWT',
-        description: 'Ingrese el token JWT',
-        in: 'header',
-      },
-      'access-token',
-    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('ld', app, document);
+  SwaggerModule.setup('docs', app, document);
 
-  await app.listen(process.env.APP_PORT ?? 4003, '0.0.0.0');
+  await app.listen(parseInt(process.env.APP_PORT ?? '4002'));
 }
-
+ 
 bootstrap();
