@@ -25,36 +25,47 @@ El proyecto hace uso de un stack tecnológico de vanguardia para asegurar el mej
 Sigue estos pasos para poner en marcha el servicio localmente:
 
 1.  **Clonar el repositorio:**
-    ```bash
+    
+
+```bash
     git clone https://github.com/AlanAguil/service-product
     cd service-product
-    ```
+```
 
 2.  **Instalar dependencias:**
-    ```bash
-    npm install
-    ```
+    
 
-> **Antes de iniciar el servicio:** Debes asegurarte de tener instalada una instancia de **MySQL** y haber creado manualmente la base de datos especificada en el archivo `.env` (por defecto: `product_db`). Si la base de datos no existe, el servicio **no levantará** debido a que TypeORM intentará conectarse a ella inmediatamente.
+```bash
+    npm install
+```
+
+> **Antes de iniciar el servicio:** Debes asegurarte de tener instalada una instancia de **MySQL** y haber creado manualmente la base de datos especificada en el archivo `.env` (por defecto: `product_db` ). Si la base de datos no existe, el servicio **no levantará** debido a que TypeORM intentará conectarse a ella inmediatamente.
 
 3.  **Configurar variables de entorno:**
     Crea un archivo `.env` en la raíz siguiendo el ejemplo de las credenciales de tu base de datos:
-    ```env
-    NODE_ENV=development
     
-    DB_HOST=localhost
-    DB_PORT=3306
-    DB_USER=root
-    DB_PASSWORD=root
-    DB_NAME=product_db
 
-    APP_PORT=4002
-    ```
+```env
+# Ambiente
+NODE_ENV=development
+
+# Base de datos
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=product_db
+DB_USERNAME=root
+DB_PASSWORD=alan2004
+
+# App
+APP_PORT=4002
+```
 
 4.  **Iniciar en modo desarrollo:**
-    ```bash
+    
+
+```bash
     npm run start:dev
-    ```
+```
 
 5.  **Acceder a la documentación:**
     Visita `http://localhost:4002/docs` (o el puerto configurado) para ver la interfaz de Swagger.
@@ -64,25 +75,34 @@ Sigue estos pasos para poner en marcha el servicio localmente:
 Para levantar la interfaz de usuario, sigue estos pasos:
 
 1.  **Clonar el repositorio:**
-    ```bash
+    
+
+```bash
     git clone https://github.com/AlanAguil/product-web-app
     cd product-web-app
-    ```
+```
 
 2.  **Instalar dependencias:**
-    ```bash
+    
+
+```bash
     npm install
-    ```
+```
+
 3.  **Configurar variables de entorno:**
     Crea un archivo `.env` en la raíz siguiendo el ejemplo de las credenciales de tu base de datos:
-    ```env
+    
+
+```env
     VITE_API_URL=http://localhost:4002/api
-    ```
+```
 
 5.  **Iniciar en modo desarrollo:**
-    ```bash
+    
+
+```bash
     npm run dev
-    ```
+```
 
 6.  **Acceder a la aplicación:**
     La aplicación estará disponible en `http://localhost:3000` (puerto por defecto de Vite).
